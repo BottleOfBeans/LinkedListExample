@@ -37,27 +37,58 @@ public class linkedList {
         }
     }
 
-    public void deleteIndex(int index){
-        if(index ==0){
+    public void deleteIndex(int index) {
+        if (index == 0) {
             head = head.next;
-        }else{
+        } else {
             Node currentNode = head;
-            for(int i=0; i<index;i++){
+            for (int i = 0; i < index; i++) {
                 currentNode = currentNode.next;
             }
-            currentNode = currentNode.next.next;
+            if (currentNode.next != null) {
+                currentNode = currentNode.next.next;
+            }else{
+                currentNode = null;
+            }
         }
     }
 
-    public void grabNodes(int index){
+    public void grabNodes(){
         Node currentNode = head;
+        System.out.println("==============================");
         if(currentNode.data == null){
             System.out.println("The Linked List is Empty");
         }else{
             while(currentNode != null){
-                System.out.println(currentNode.data+" ");
+                System.out.println("Data = "+currentNode.data+"     Link="+currentNode.next);
                 currentNode = currentNode.next;
             }
         }
+    }
+    public String grabData(int index){
+        if (index == 0) {
+            return head.data;
+        } else {
+            Node currentNode = head;
+            for (int i = 0; i < index; i++) {
+                currentNode = currentNode.next;
+            }
+            return currentNode.data;
+        }
+    }
+
+    public void dataSwap(int index1, int index2){
+        String data1 = grabData(index1);
+        String data2 = grabData(index2);
+        Node currentNode = head;
+        for (int i = 0; i < index1; i++) {
+            currentNode = currentNode.next;
+        }
+        currentNode.data = data2;
+        currentNode = head;
+        for (int i = 0; i < index2; i++) {
+            currentNode = currentNode.next;
+        }
+        currentNode.data = data1;
     }
 }
